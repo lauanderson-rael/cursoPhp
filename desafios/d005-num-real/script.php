@@ -11,34 +11,18 @@
 
 <body>
     <section>
-        <h1>Conversor de moedas v1.0</h1>
-
+        <h1>Analizador de numeros v1.0</h1>
+        <!-- /* number_format($real, 2, ",", ".") */ -->
         <?php
-        $top = 100;
-        $format = "json";
-        //
-        $url = "https://olinda.bcb.gov.br/olinda/servico/PTAX/versao/v1/odata/CotacaoDolarDia(dataCotacao=@dataCotacao)?@dataCotacao='12-31-2024'&$top$format";
-        $response = file_get_contents($url);
-        $data = json_decode($response, true);
-        $cotacaoAPI = $data['value'][0]['cotacaoCompra'];
-        $site = "Banco do Brasil";
-
-        //
-        $real = $_GET['valorRS'];
-        $real = str_replace(',', '.', $real);
-        $real = (float) $real;
-
-        $conversao = $real / $cotacaoAPI;
-        echo "<p>Seus R$ $real equivalem a <b>US$ $conversao</b></p>";
-        echo "<p>Cotação obtida diretamento do <b>$site</b></p>";
-
-
-        echo "<pre>";
-        print_r($cotacaoAPI);
-        echo "</pre>";
-
-
+        $num = $_REQUEST['num'];
+        $parteInteira = (int) $num;
+        $parteDecimal = $num - $parteInteira;
         ?>
+        <p>Analizando o número <b><?php echo number_format($num, 3, ",", ".") ?></b></p>
+        <ul>
+            <li>A parte inteira e <b><?php echo number_format($parteInteira, 0, ",", ".") ?></b> </li>
+            <li>A parte decimal e <b><?php echo number_format($parteDecimal, 3, ",", ".") ?> </b></li>
+        </ul>
         <br>
         <a href="javascript:history.go(-1)">
             <button>

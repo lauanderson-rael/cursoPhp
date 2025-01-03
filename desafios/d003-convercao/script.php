@@ -10,28 +10,26 @@
 </head>
 
 <body>
-    <header>
-        <h1>Resultado Final</h1>
-    </header>
+    <section>
+        <h1>Conversor de moedas v1.0</h1>
 
-    <main>
         <?php
-        #var_dump($_GET);
-        $n = $_GET['numero'];
-        $ant = $n - 1;
-        $suc = $n + 1;
-        echo "<p>O número escolhido foi <b>$n</b></p>";
-        echo "<p>O seu antecessor é <b>$ant</b></p>";
-        echo "<p>O seu sucessor é <b>$suc</b></p>";
+        $real = $_GET['valorRS'];
+        $real = str_replace(',', '.', $real);
+        $real = (float) $real;
+        $cotacao = 6.20;
+        $dolar = $real / $cotacao;
+        echo "<p>Seus R$ " . number_format($real, 2, ",", ".") . " equivalem a <b>US$ " . number_format($dolar, 2, ",", ".") . "</b></p>";
+        echo "<p><b>*Cotação fixa de US$ $cotacao</b> informada diretamente no código</p>";
+
         ?>
         <br>
         <a href="javascript:history.go(-1)">
             <button>
                 <i class="fa-solid fa-arrow-left"></i> voltar
             </button>
-
         </a>
-    </main>
+    </section>
 
 
 </body>
